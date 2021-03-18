@@ -1,0 +1,342 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+
+namespace project_2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Welcome to Shape world! Please choose a shape.");
+            Console.WriteLine("Please select a shape based on it's corresponding number.\n" +
+                  "1:Triangle\n2:Rectangle\n3:Square\n4:Pentagon\n5:Hexagon\n6:Circle");
+            double number = Convert.ToDouble(Console.ReadLine());
+
+            switch (number)
+            {
+                case 1:
+
+                    Console.WriteLine("What is the base of the triangle?");
+                    double TBase = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("What is the height of the triangle?");
+                    double THeight = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("What is the length of the triangle?");
+                    double TLength = Convert.ToDouble(Console.ReadLine());
+
+
+                    Triangle triangle = new Triangle(THeight, TLength, TBase);
+                    double TA = triangle.PrintArea();
+                    double TP = triangle.PrintPerimeterT();
+                    Console.WriteLine("Perimeter:" + TP);
+                    Console.WriteLine("Area:" + TA);
+                    var tri = new[]
+                    {
+
+
+                "     /\\",
+                "    /  \\",
+                "   /    \\",
+                "  /      \\",
+                " /________\\",
+                };
+
+
+                    Console.WindowWidth = 145;
+                    Console.WriteLine("\n");
+                    foreach (string t in tri)
+                    {
+                        Console.WriteLine(t);
+                    }
+
+
+
+
+                    break;
+                case 2:
+                    Console.WriteLine("What is the length of the rectangle?");
+                    double RLength = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("What is the height of the rectangle?");
+                    double RHeight = Convert.ToDouble(Console.ReadLine());
+                    Rectangle rectangle = new Rectangle(RLength, RHeight);
+                    double RA = rectangle.PrintArea();
+                    double RP = rectangle.PrintPerimeterR();
+                    Console.WriteLine("Permimeter:" + RP);
+                    Console.WriteLine("Area:" + RA);
+                    var rec = new[]
+                {
+               " ___________ ",
+               "|           |",
+               "|           |",
+               "|           |",
+               "|           |",
+               "|           |",
+               "|           |",
+               "|___________|",
+
+            };
+                    Console.WindowWidth = 145;
+                    Console.WriteLine("\n");
+                    foreach (string r in rec)
+                    {
+                        Console.WriteLine(r);
+                    }
+
+                    break;
+
+                case 3:
+                    Console.WriteLine("What is the length of the square?");
+                    double SLength = Convert.ToDouble(Console.ReadLine());
+                    Square square = new Square(SLength);
+                    double SA = square.PrintArea();
+                    double SP = square.PrintSQPerimeter();
+                    Console.WriteLine("Perimeter:" + SP);
+                    Console.WriteLine("Area:" + SA);
+                    var sq = new[]
+               {
+               " __________ " ,
+               "|          |",
+               "|          |",
+               "|          |",
+               "|__________|",
+            };
+                    Console.WindowWidth = 145;
+                    Console.WriteLine("\n");
+                    foreach (string s in sq)
+                    {
+                        Console.WriteLine(s);
+                    }
+
+                    break;
+                case 4:
+                    Console.WriteLine("What is the length of the pentagon?");
+                    double PLength = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("What is the radius of the pentagon?");
+                    double PRadius = Convert.ToDouble(Console.ReadLine());
+                    Pentagon pentagon = new Pentagon(PLength, PRadius);
+                    double PA = pentagon.PrintArea();
+                    double PP = pentagon.PrintPPerimeter();
+                    Console.WriteLine("Perimeter:" + PP);
+                    Console.WriteLine("Area:" + PA);
+
+                    var pen = new[]
+
+                {
+               " __________" ,
+               "|          |",
+               "|          |",
+               "|          |",
+               "|          |",
+               "|          |",
+               " \\        /" ,
+               "  \\      /"  ,
+               "   \\    /"   ,
+               "    \\  /"    ,
+               "     \\/"     ,
+
+
+            };
+                    Console.WindowWidth = 145;
+                    Console.WriteLine("\n");
+                    foreach (string p in pen)
+                    {
+                        Console.WriteLine(p);
+                    }
+
+                    break;
+                case 5:
+                    Console.WriteLine("What is the length of the hexagon?");
+                    double HLength = Convert.ToDouble(Console.ReadLine());
+
+                    Hexagon hexagon = new Hexagon(HLength);
+                    double HA = hexagon.PrintArea();
+                    double HP = hexagon.PrintHexPerimeter();
+                    Console.WriteLine("Perimeter:" + HP);
+                    Console.WriteLine("Area:" + HA);
+                    var hex = new[]
+                {
+              "    _____  ",
+              "   /     \\ ",
+              "  /       \\",
+              "  \\       / ",
+              "   \\_____/  ",
+
+            };
+                    Console.WindowWidth = 145;
+                    Console.WriteLine("\n");
+                    foreach (string h in hex)
+                    {
+                        Console.WriteLine(h);
+                    }
+
+                    break;
+                case 6:
+                    Console.WriteLine("What is the radius of the circle?");
+                    double Radius = Convert.ToDouble(Console.ReadLine());
+
+                    Circle circle = new Circle(Radius);
+                    double CA = circle.PrintArea();
+                    double CP = circle.PrintAPerimeter();
+                    Console.WriteLine("Circumference:" + CP);
+                    Console.WriteLine("Area:" + CA);
+
+                    var circ = new[]
+               {
+                    "            .   ",
+                    "       .          .",
+                    "     .              .",
+                    "    .                .",
+                    "    .                .",
+                    "     .              .",
+                    "       .          .",
+                    "          .  .  .",
+
+            };
+                    Console.WindowWidth = 145;
+                    Console.WriteLine("\n");
+                    foreach (string c in circ)
+                    {
+                        Console.WriteLine(c);
+                    }
+                    break;
+
+            }
+            Console.ReadKey();
+
+        }
+        public abstract class Shape
+        {
+            public abstract double PrintArea();
+        }
+        public class Triangle : Shape
+        {
+            public double THeight;
+            public double TLength;
+            public double TBase;
+
+            public Triangle(double THeight, double TLength, double TBase)
+            {
+                this.THeight = THeight;
+                this.TLength = TLength;
+                this.TBase = TBase;
+            }
+
+            public override double PrintArea()
+            {
+                double A = ((TBase * THeight) / 2);
+                return A;
+            }
+
+            public double PrintPerimeterT()
+            {
+                double P = TLength + TBase + THeight;
+                return P;
+            }
+
+        }
+
+        public class Rectangle : Shape
+        {
+
+            public double RHeight;
+            public double RLength;
+            public Rectangle(double RHeight, double RLength)
+            {
+                this.RHeight = RHeight;
+                this.RLength = RLength;
+            }
+            public override double PrintArea()
+            {
+                double A = (RHeight * RLength);
+                return A;
+            }
+            public double PrintPerimeterR()
+            {
+                double P = (RHeight * RLength) * 2;
+                return P;
+            }
+        }
+        public class Square : Shape
+        {
+            public double SLength;
+            public Square(double SLength)
+            {
+                this.SLength = SLength;
+            }
+            public override double PrintArea()
+            {
+                double A = (SLength * 4);
+                return A;
+            }
+            public double PrintSQPerimeter()
+            {
+                double P = (SLength * 4);
+                return P;
+            }
+        }
+
+        public class Pentagon : Shape
+        {
+            public double PLength;
+            public double PRadius;
+
+
+
+            public Pentagon(double PLength, double PRadius)
+            {
+                this.PLength = PLength;
+                this.PRadius = PRadius;
+            }
+            public override double PrintArea()
+            {
+                double A = (PLength * PRadius) * (5 / 2);
+                return A;
+            }
+            public double PrintPPerimeter()
+            {
+                double P = (5 * PLength);
+                return P;
+            }
+        }
+        public class Hexagon : Shape
+        {
+            public double HLength;
+            public Hexagon(double HLength)
+            {
+                this.HLength = HLength;
+            }
+            public override double PrintArea()
+            {
+                double A = (3 * (Math.Sqrt(3) / 2)) * (HLength * HLength);
+                return A;
+            }
+            public double PrintHexPerimeter()
+            {
+                double P = 6 * HLength;
+                return P;
+            }
+        }
+        public class Circle : Shape
+        {
+            public double Radius;
+            public Circle(double Radius)
+            {
+                this.Radius = Radius;
+            }
+            public override double PrintArea()
+            {
+                double A = (Radius * Radius) * 3.14;
+
+                return A;
+            }
+            public double PrintAPerimeter()
+            {
+                double P = (2 * Radius) * 3.14;
+                return P;
+            }
+        }
+    }
+}
