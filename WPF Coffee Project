@@ -1,0 +1,213 @@
+WPF Coffee Project 
+
+WPF MAIN WINDOW 
+
+<Window x:Class="WPF.midterm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.midterm"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="First Name" HorizontalAlignment="Left" Margin="58,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.329,-1.362" Height="40" Width="91"/>
+        <TextBox x:Name="firstBox" HorizontalAlignment="Left" Height="22" Margin="198,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="Last Name" HorizontalAlignment="Left" Margin="58,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.237,-4.154" Height="37" Width="73"/>
+        <TextBox x:Name="lastBox" HorizontalAlignment="Left" Height="22" Margin="198,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="orderBox"  HorizontalAlignment="Left" Height="219" Margin="429,58,0,0" VerticalAlignment="Top" Width="317"/>
+        <Label Content="Customer Information" HorizontalAlignment="Left" Margin="429,23,0,0" VerticalAlignment="Top" Width="129"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="49,312,0,0" VerticalAlignment="Top" Width="100" Height="34"  Click="Button_Click" RenderTransformOrigin="0.465,1.529"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="237,312,0,0" VerticalAlignment="Top" Width="100" Height="34" Click="Button_Click_1"/>
+        <DatePicker x:Name="birthDate" HorizontalAlignment="Left" Margin="198,137,0,0" VerticalAlignment="Top" Height="38" Width="115"/>
+        <Label Content="Date of Birth" HorizontalAlignment="Left" Margin="58,136,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.237,-4.154" Height="39" Width="91"/>
+        <Label Content="Phone Number" HorizontalAlignment="Left" Margin="58,193,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.237,-4.154" Height="39" Width="91"/>
+        <TextBox x:Name="phoneBox" HorizontalAlignment="Left" Height="22" Margin="198,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+
+
+    </Grid>
+</Window>
+ 
+
+
+PROGRAM 1
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+namespace Equation
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            Equation e = new Equation();
+            Console.WriteLine("Enter a number");
+            e.Left = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter another number");
+            e.Right = Convert.ToDouble(Console.ReadLine());
+
+
+            Console.WriteLine($"The sum is: " + e.Add());
+            Console.WriteLine($"The difference is: " + e.Subtract());
+            Console.WriteLine($"The product is: " + e.Multiply());
+            Console.WriteLine($"{e.Left} to the power of {e.Right} is: { e.LeftToThePower(power: (int)e.Right)}");
+            Console.WriteLine($"{e.Right} to the power of {e.Left} is: {e.RightToThePower(power: (int)e.Left)}");
+        }
+    }
+    public class Equation
+    {
+        public double Left { get; set; }
+        public double Right { get; set; }
+
+        public Equation()
+        {
+            Left = 0;
+            Right = 0;
+        }
+
+        public Equation(double left, double right)
+        {
+            left = Left;
+            right = Right;
+        }
+
+        public double Add()
+        {
+            double add;
+            add = Left + Right;
+            return add;
+        }
+
+        public double Subtract()
+        {
+            double subtract;
+            subtract = Left - Right;
+            return subtract;
+        }
+
+        public double Multiply()
+        {
+            double multiply;
+            multiply = Left * Right;
+            return multiply;
+        }
+
+        public double LeftToThePower(int power)
+        {
+            power = (int)Right;
+            double LPower = Math.Pow(Left, power);
+            return LPower;
+        }
+
+        public double RightToThePower(int power)
+        {
+            power = (int)Left;
+            double RPower = Math.Pow(Right, power);
+            return RPower;
+        }
+    }
+}
+
+
+
+
+PROGRAM 2
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+namespace coffee
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+       
+            double espresso = 2.15;
+            double cappuccino = 4.20;
+            double latte = 5.00;
+            double americano = 3.55;
+            double drip = 1.15;
+            double vanillashot = 0.75;
+            double espressoshot = 0.80;
+            double salestax = 0.075;
+            int userchoice;
+            double total = 0;
+            Console.ReadLine();
+            Console.WriteLine("Hello! May I take your coffee order?");
+            while (true)
+            {
+                userchoice = menu();
+     
+                switch (userchoice)
+                {
+                    case 1: total = total + espresso; break;
+                    case 2: total = total + cappuccino; break;
+                    case 3: total = total + latte; break;
+                    case 4: total = total + americano; break;
+                    case 5: total = total + drip; break;
+                }
+                Console.Write("Would you like to add an extra shot? Enter Yes or Y \n");
+                string input = Console.ReadLine();
+                if (input.Equals("Yes") || input.Equals("Y"))
+                {
+                    userchoice = 0;
+                    userchoice = extrashots();
+               
+                    switch (userchoice)
+                    {
+                        case 1: total = total + vanillashot; break;
+                        case 2: total = total + espressoshot; break;
+                    }
+                }
+
+                Console.Write("Would you like continue? Enter y or n\n");
+                input = Console.ReadLine();
+             
+                if (input.Equals("n") || input.Equals("N"))
+                {
+                    break;
+                }
+
+            }
+
+           
+            total = total + total * salestax;
+           
+            Console.WriteLine("Total cost : $ {0}", total.ToString("N2"));
+            Console.ReadKey();
+        }
+   
+        public static int menu()
+        {
+            int menuselection;
+            Console.WriteLine("Menu");
+            Console.WriteLine("Item Price");
+            Console.WriteLine("1.Espresso $2.15");
+            Console.WriteLine("2.Cappuccino $4.20");
+            Console.WriteLine("3.Latte $5.00");
+            Console.WriteLine("4.Americano $3.55");
+            Console.WriteLine("5.Drip $1.25");
+            Console.Write("Enter your menu choice[1-5]: \n");
+            int.TryParse(Console.ReadLine(), out menuselection);
+            return menuselection;
+        }
+
+     
+        public static int extrashots()
+        {
+            int choice;
+            Console.WriteLine("1. Shot of Vanilla = $0.75");
+            Console.WriteLine("2. Shot of Espresso = $0.80");
+            Console.Write("Enter your menu choice[1-2]: \n");
+            int.TryParse(Console.ReadLine(), out choice);
+            return choice;
+        }
+
+    }
+}
