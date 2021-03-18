@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace Commands
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //ask user for command using corresponding number
+            Console.WriteLine("Hello! I will take all of your commands...tell me what to do." +
+                "\n I will Echo, Add, Multipy, or Greet." + "\n What can I help with today?" + "\n \n Type the corresponding number for your command."
+                + "\n 1. Echo \n 2. Add \n 3. Multiply \n 4. Greet\n");
+            string entry;
+            int choice = Convert.ToInt32(Console.ReadLine());
+            //do while loop for the chosen command to be repeated
+            do
+            {
+                // repeat back what user says
+                if (choice == 1)
+                {
+                    Console.WriteLine("Please type a message");
+                    string echo1 = Convert.ToString(Console.ReadLine());
+                    Console.WriteLine(echo1);
+                }
+                //create array for number of inputs
+                // sum up the numbers in the array
+                if (choice == 2)
+                {
+                    Console.WriteLine("How many numbers would you like to add?");
+                    int number = Convert.ToInt32(Console.ReadLine());
+                    int[] nums = new int[number];
+                    Console.WriteLine("Please enter your numbers!");
+                    for (int i = 0; i < nums.Length; i++)
+                    {
+                        nums[i] = Convert.ToInt32(Console.ReadLine());
+                    }
+                    int finalN = nums.Aggregate(0, (a, b) => a + b);
+                    Console.WriteLine("Sum:\n" + finalN);
+                }
+                //create an array for the user's chosen amount of numbers
+                //multiply the numbers in the array for the product
+                if (choice == 3)
+                {
+                    Console.WriteLine("How many numbers would you like to multiply?");
+                    int multiple = Convert.ToInt32(Console.ReadLine());
+                    int[] m1 = new int[multiple];
+                    Console.WriteLine("Please enter your numbers!");
+                    for (int i = 0; i < m1.Length; i++)
+                    {
+                        m1[i] = Convert.ToInt32(Console.ReadLine());
+                    }
+                    int finalM = m1.Aggregate(1, (a, b) => a * b);
+                    Console.WriteLine("Product:\n" + finalM);
+                }
+                //new array for computer to randomize
+                //create list of greetings for computer to choose at random
+                else if (choice == 4)
+                {
+                    var surprise = new Random();
+                    var greet = new List<string> { "Hey", "Hi", "WASSSSUUUHH", "What's poppin", "Hola amigo" };
+                    int pick = surprise.Next(greet.Count);
+                    Console.WriteLine(greet[pick]);
+                }
+                Console.WriteLine("\n\nWould you like to continue making commands? \n Type 'y' to continue \n Type 'n' to stop");
+                entry = Console.ReadLine();
+            }
+            while (entry != "n");
+            Console.ReadKey();
+        }
+        //interface for commands to be listed
+        public interface IInterpreter
+        {
+
+            string Interpret { get; set; }
+            public class CommandProcessor
+            {
+                // private Dictionary<string, IInterpreter> process = new Dictionary();
+                string Interpreter { get; set; }
+            }
+        }
+
+    }
+}
