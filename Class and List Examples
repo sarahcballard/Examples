@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace IMDB
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+    public interface IReviewable
+    {
+        string AddReview(Review review);
+        List<Review> GetReviews()
+        {
+            List<Review> review = new List<Review>();
+
+            return review;
+
+
+        }
+        public abstract class Entry : IReviewable
+        {
+            private List<Billing> bill = new List<Billing>();
+            public List<Billing> Cast { get { return bill; } set { bill = value; } }
+            public string Name { get; set; }
+            public string Description { get; set; }
+
+            public string AddReview(Review review)
+            {
+                return Name + Description;
+            }
+            public string GetReview()
+            {
+                return Name + Description;
+            }
+        }
+        public class TvShow : Entry
+        {
+            private List<Season> season = new List<Season>();
+            public List<Season> Seasons { get { return season; } set { season = value; } }
+
+        }
+        public class Movie : Entry
+        {
+            public DateTime ReleaseDate { get; set; }
+        }
+        public class Review
+        {
+            public Entry Target { get; set; }
+            public float Rating { get; set; }
+            public string Text { get; set; }
+        }
+        public class Billing
+        {
+            public Actor Actor { get; set; }
+            public Entry Job { get; set; }
+            public string Role { get; set; }
+        }
+        public class Actor
+        {
+            public string Name { get; set; }
+            private List<Billing> bills = new List<Billing>();
+            public List<Billing> Billings { get { return bills; } set { bills = value; } }
+        }
+        public class Season
+        {
+            private List<Episode> episode = new List<Episode>();
+            public List<Episode> Episodes { get { return episode; } set { episode = value; } }
+        }
+        public class Episode
+        {
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public DateTime AirDate { get; set; }
+        }
+    }
+}
+
