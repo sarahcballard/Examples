@@ -1,0 +1,136 @@
+PROGRAM 
+
+using System;
+using System.Drawing;
+
+namespace MIS3013Project1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+
+                Console.WriteLine("Enter path to image or \"n\" to cancel");
+                string path = Console.ReadLine();
+                if (path.Equals("n"))
+                {
+                    break;
+                }
+                Console.WriteLine("Enter size of image as <height>x<width>");
+                string size = Console.ReadLine();
+                string[] imagesize = size.Split("x");
+                int height = Int32.Parse(imagesize[0]);
+
+                int width = Int32.Parse(imagesize[0]);
+
+
+                int[,] array = ImageHelper.LoadPixelValuesFromPath(path, height, width);
+
+
+                for (int i = 0; i < array.GetLength(1); i++)
+                {
+
+                    for (int y = 0; y < array.GetLength(1); y++)
+
+                    {
+                        if (array[y, i] <= 25)
+                        {
+                            Console.Write("@");
+                        }
+                        else if (array[y, i] <= 50)
+                        {
+                            Console.Write("%");
+                        }
+                        else if (array[y, i] <= 75)
+                        {
+                            Console.Write("#");
+                        }
+                        else if (array[y, i] <= 100)
+                        {
+                            Console.Write("*");
+                        }
+                        else if (array[y, i] <= 125)
+                        {
+                            Console.Write("+");
+                        }
+                        else if (array[y, i] <= 150)
+                        {
+                            Console.Write("=");
+                        }
+                        else if (array[y, i] <= 175)
+                        {
+                            Console.Write("-");
+                        }
+                        else if (array[y, i] <= 200)
+                        {
+                            Console.Write(":");
+                        }
+                        else if (array[y, i] <= 225)
+                        {
+                            Console.Write(".");
+                        }
+                        else
+                        {
+                            Console.Write(" ");
+                        }
+                    }
+                    Console.WriteLine("");
+
+                }
+            }
+        }
+    }
+}
+
+
+
+IMAGEHELPER CLASS
+
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Text;
+
+namespace MIS3013Project1
+{
+    public static class ImageHelper
+    {
+        public static int[,] LoadPixelValuesFromPath(string path, int height, int width)
+        {
+            var image = new Bitmap(path);
+            var resized = Resize(image, height, width);
+            return GetLuminanceValues(resized);
+        }
+
+        private static Bitmap Resize(Bitmap image, int desiredHeight, int desiredWidth)
+        {
+            var scale = Math.Min((float)desiredWidth / image.Width, (float)desiredHeight / image.Height);
+            var newHeight = (int)(image.Height * scale);
+            var newWidth = (int)(image.Width * scale);
+            return new Bitmap(image, new Size(newWidth, newHeight));
+        }
+
+        /// <summary>
+        /// Converts an image into a 2d array of luminance values (0-255)
+        /// </summary>
+        /// <param name="image">Image to process</param>
+        /// <returns></returns>
+        private static int[,] GetLuminanceValues(Bitmap image)
+        {
+            int[,] pixelValues = new int[image.Width, image.Height];
+            for (var x = 0; x < image.Width; x++)
+            {
+                for (var y = 0; y < image.Height; y++)
+                {
+                    var pixel = image.GetPixel(x, y);
+                    pixelValues[x,y] = (int)((pixel.R * 0.2126) + (pixel.G * 0.7152) + (pixel.B * 0.0722));
+                }
+            }
+
+            return pixelValues;
+        }
+    }
+}
