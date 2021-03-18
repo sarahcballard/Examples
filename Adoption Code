@@ -1,0 +1,225 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace Rougelike
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //create list for cats
+            List<Cats> cat = new List<Cats>();
+            //add all cat info
+            cat.Add(new Cats
+            {
+                Name = "Boots",
+                Age = 5,
+                Immunizations = "Shots Recieved: Rabies (8/20), Planleukopenia (4/19), Calicivirus (4/19) \n Not Recieved: Viral Rhinotracheitis (N/A)",
+                Desc = "Best looking, will knock over all of your belongings just because",
+                Adoption = "Not Adopted",
+                Owner = "N/A",
+                Hypoallergenic = "Hypoallergenic",
+            });
+            cat.Add(new Cats
+            {
+                Name = "Clawdia",
+                Age = 2,
+                Immunizations = "Shots Recieved: Planleukopenia (1/19), Calicivirus (10/19) \n Not Recieved: Viral Rhinotracheitis (N/A), Rabies (N/A)",
+                Desc = "Most chill, enjoys being buried under blankets",
+                Adoption = "Adopted",
+                Owner = "Mariah Carey: (12 / 19)",
+                Hypoallergenic = "Hypoallergenic",
+            });
+            cat.Add(new Cats
+            {
+                Name = "George",
+                Age = 4,
+                Immunizations = "Shots Recieved: Rabies (3/20), Planleukopenia (3/20), Calicivirus (3/20), Rhinotracheitis (4/20) \n Not Recieved: N/A",
+                Desc = "Stupid and doesn't know what is happening, very lovable and the employee favorite",
+                Adoption = "Adopted",
+                Owner = "Sarah Ballard: (5 / 20)",
+                Hypoallergenic = "Not Hypoallergenic",
+            });
+            //create list for dogs
+            List<Dogs> dog = new List<Dogs>();
+            //add all dog info to list
+            dog.Add(new Dogs
+            {
+                Name = "Yoda",
+                Age = 11,
+                Immunizations = "Shots Recieved: Rabies (6/20), Parvovirus (6/20), Distemper (6/20), Adenovirus (6/20) \n Not Recieved: N/A",
+                Desc = "Old, wise little man",
+                Adoption = "Adopted",
+                Owner = "Jon Wick: (8/20)",
+                Training = "Well Trained",
+            });
+            dog.Add(new Dogs
+            {
+                Name = "Dobby",
+                Age = 6,
+                Immunizations = "Shots Recieved: Rabies (4/18) \n Not Recieved: Parvovirus (N/A), Distemper (N/A), Adenovirus (N/A) ",
+                Desc = "Needs an owner that is okay never having personal space again",
+                Adoption = "Not Adopted",
+                Owner = "N/A",
+                Training = "Not Trained",
+            });
+            dog.Add(new Dogs
+            {
+                Name = "Burtrum",
+                Age = 1,
+                Immunizations = "Shots Recieved: (N/A) \n Not Recieved: Rabies (N/A), Parvovirus (N/A), Distemper (N/A), Adenovirus (N/A) ",
+                Desc = "Tiny but mighty, will make a good guard dog",
+                Adoption = "Not Adopted",
+                Owner = "N/A",
+                Training = "Not Trained",
+            });
+
+            //ask user for their preferred pet
+            Console.WriteLine("Welcome to Furry Orphan Adoption! Would you like to adopt a cat or a dog, or both? Select the corresponding number: \n 1. Cat \n 2. Dog \n 3. Both");
+            int adopt = Convert.ToInt32(Console.ReadLine());
+            //if statements for displaying cat, dog or both
+            if (adopt == 1)
+            {
+                // seperate adopted vs available cats
+                Console.WriteLine("Cats available for adoption:\n");
+                foreach (Cats cats in cat)
+                {
+                    if (cats.Adoption == "Not Adopted")
+                        Console.WriteLine("\n Name: " + cats.Name + "\nAdoptions Status: " + cats.Adoption);
+                }
+                Console.WriteLine("Cats that have been adopted: \n");
+                foreach (Cats cats in cat)
+                {
+                    if (cats.Adoption == "Adopted")
+                    {
+                        Console.WriteLine("\nName: " + cats.Name + "\nAdoption Status: " + cats.Adoption);
+                    }
+                }
+                // user picks which cat to get more info on
+                Console.WriteLine("---Type in the name of the cat you want more information for---");
+                string info = Console.ReadLine();
+                //display the rest of the cat's info
+                foreach (Cats cats in cat)
+                {
+                    if (cats.Name == info)
+                    {
+                        Console.WriteLine("\n\nName: " + cats.Name + "\n\nAdoption Status: " + cats.Adoption + "\n\nAge: " + cats.Age + "\n\nImmunization: " + cats.Immunizations + "\n\nDescription: " + cats.Desc + "\n\nOwner: " + cats.Owner + "\n\nHypoallergenic: " + cats.Hypoallergenic);
+                    }
+                }
+            }
+            if (adopt == 2)
+            {
+                // seperate adopted vs available cats
+                Console.WriteLine("Dogs available for adoption:\n");
+                foreach (Dogs dogs in dog)
+                {
+                    if (dogs.Adoption == "Not Adopted")
+                        Console.WriteLine("\n Name: " + dogs.Name + "\nAdoptions Status: " + dogs.Adoption);
+                }
+                Console.WriteLine("\n\nDogs that have been adopted: \n");
+                foreach (Dogs dogs in dog)
+                {
+                    if (dogs.Adoption == "Adopted")
+                    {
+                        Console.WriteLine("\nName: " + dogs.Name + "\nAdoption Status: " + dogs.Adoption);
+                    }
+                }
+                //user picks which dog to get more info on
+                Console.WriteLine("---Type in the name of the dog you want more information for---");
+                string info = Console.ReadLine();
+
+                //display the selected dog's full info
+                foreach (Dogs dogs in dog)
+                {
+                    if (dogs.Name == info)
+                    {
+                        Console.WriteLine("\n\nName: " + dogs.Name + "\n\nAdoption Status: " + dogs.Adoption + "\n\nAge: " + dogs.Age + "\n\nImmunization: " + dogs.Immunizations + "\n\nDescription: " + dogs.Desc + "\n\nOwner: " + dogs.Owner + "\n\nTraining: " + dogs.Training);
+                    }
+                }
+            }
+            if (adopt == 3)
+            {
+                //display the adopted versus available cats and dogs
+                Console.WriteLine("---Cats and Dogs available for adoption---\n\n");
+                foreach (Cats cats in cat)
+                {
+                    if (cats.Adoption == "Not Adopted")
+                        Console.WriteLine("\n Name: " + cats.Name + "\nAdoptions Status: " + cats.Adoption);
+                }
+                foreach (Dogs dogs in dog)
+                {
+                    if (dogs.Adoption == "Not Adopted")
+                        Console.WriteLine("\n Name: " + dogs.Name + "\nAdoptions Status: " + dogs.Adoption);
+
+                }
+                Console.WriteLine("\n\n---Cats and Dogs that have been adopted---\n\n");
+                foreach (Cats cats in cat)
+                {
+                    if (cats.Adoption == "Adopted")
+                    {
+                        Console.WriteLine("\nName: " + cats.Name + "\nAdoption Status: " + cats.Adoption);
+                    }
+                }
+                foreach (Dogs dogs in dog)
+                {
+                    if (dogs.Adoption == "Adopted")
+                    {
+                        Console.WriteLine("\nName: " + dogs.Name + "\nAdoption Status: " + dogs.Adoption);
+                    }
+                }
+                //user picks which pet to get more info on
+                Console.WriteLine("---Type in the name of the pet you want more information for---");
+                string pet = Console.ReadLine();
+                // display all info of the pet
+                foreach (Cats cats in cat)
+                {
+                    if (cats.Name == pet)
+                    {
+                        Console.WriteLine("\n\nName: " + cats.Name + "\n\nAdoption Status: " + cats.Adoption + "\n\nAge: " + cats.Age + "\n\nImmunization: " + cats.Immunizations + "\n\nDescription: " + cats.Desc + "\n\nOwner: " + cats.Owner + "\n\nHypoallergenic: " + cats.Hypoallergenic);
+                    }
+                }
+                foreach (Dogs dogs in dog)
+                {
+                    if (dogs.Name == pet)
+                    {
+                        Console.WriteLine("\n\nName: " + dogs.Name + "\n\nAdoption Status: " + dogs.Adoption + "\n\nAge: " + dogs.Age + "\n\nImmunization: " + dogs.Immunizations + "\n\nDescription: " + dogs.Desc + "\n\nOwner: " + dogs.Owner + "\n\nTraining: " + dogs.Training);
+                    }
+                }
+            }
+            Console.ReadKey();
+        }
+        //create interface for cats and dogs
+        public interface IPets
+        {
+            string Name { get; set; }
+            int Age { get; set; }
+            string Desc { get; set; }
+            string Immunizations { get; set; }
+            string Adoption { get; set; }
+            string Owner { get; set; }
+
+        }
+        //class for cats and it's lists to store and pull info
+        public class Cats : IPets
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public string Desc { get; set; }
+            public string Immunizations { get; set; }
+            public string Adoption { get; set; }
+            public string Hypoallergenic { get; set; }
+            public string Owner { get; set; }
+        }
+        //class for dogs and lists to store and pull info
+        public class Dogs : IPets
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public string Desc { get; set; }
+            public string Immunizations { get; set; }
+            public string Adoption { get; set; }
+            public string Training { get; set; }
+            public string Owner { get; set; }
+        }
+    }
+}
